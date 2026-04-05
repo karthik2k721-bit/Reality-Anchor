@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snap Back</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #f3f8f7;
+            --surface: #ffffff;
+            --ink: #152c2a;
+            --accent: #0f766e;
+            --line: #d5e5e0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 18px;
+            font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+            background: radial-gradient(circle at center, #eaf5f1, var(--bg));
+            color: var(--ink);
+        }
+
+        .modal {
+            width: min(360px, 100%);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: var(--surface);
+            padding: 18px;
+            text-align: center;
+            box-shadow: 0 12px 32px rgba(10, 36, 30, 0.12);
+        }
+
+        .time {
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        h1 {
+            margin: 10px 0 8px;
+            font-size: 1.2rem;
+        }
+
+        p {
+            margin: 0 0 14px;
+            color: #4c6260;
+        }
+
+        button {
+            border: 0;
+            border-radius: 10px;
+            padding: 10px 14px;
+            width: 100%;
+            font-size: 0.95rem;
+            background: linear-gradient(160deg, #0f766e, #115e59);
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="modal">
+        <p id="current-time" class="time">--:--</p>
+        <h1>You're here. Let's refocus.</h1>
+        <p>Take a breath and return to what matters right now.</p>
+        <button id="resume-btn">Resume</button>
+    </section>
+
+    <script src="snap-back.js"></script>
+</body>
+
+</html>

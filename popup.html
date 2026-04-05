@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reality Anchor</title>
+    <link rel="stylesheet" href="popup-styles.css" />
+</head>
+
+<body>
+    <main class="panel">
+        <header class="header">
+            <h1>Reality Anchor</h1>
+            <p>Stay present, one check-in at a time.</p>
+        </header>
+
+        <section class="timer-card">
+            <div class="row">
+                <span class="label">Focus Timer</span>
+                <div class="timer-editor">
+                    <input id="timer-input" class="timer-input" type="text" value="25:00" inputmode="numeric"
+                        spellcheck="false" aria-label="Focus timer duration" readonly />
+                    <div class="timer-stepper">
+                        <button id="timer-up" class="timer-step" type="button" aria-label="Increase timer">▲</button>
+                        <button id="timer-down" class="timer-step" type="button" aria-label="Decrease timer">▼</button>
+                    </div>
+                </div>
+            </div>
+            <p id="session-state" class="session-state">Session not running</p>
+            <button id="start-stop-button" class="primary">Start Focus</button>
+        </section>
+
+        <section class="drift-card">
+            <div class="row">
+                <span class="label">Drift count today</span>
+                <span id="drift-count" class="drift-count">0</span>
+            </div>
+            <button id="reset-button" class="secondary">Reset Today</button>
+        </section>
+    </main>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>

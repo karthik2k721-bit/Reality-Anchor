@@ -1,0 +1,150 @@
+:root {
+    color-scheme: light;
+    --bg: #f4f8f4;
+    --surface: #ffffff;
+    --ink: #19342f;
+    --muted: #4d6862;
+    --accent: #0f766e;
+    --accent-strong: #115e59;
+    --warning: #b45309;
+    --line: #d5e6e1;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    width: 320px;
+    min-height: 320px;
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top, #e6f4ef, var(--bg));
+    color: var(--ink);
+}
+
+.panel {
+    padding: 14px;
+    display: grid;
+    gap: 12px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: 0.02em;
+}
+
+.header p {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.timer-card,
+.drift-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.label {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.timer-editor {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.timer-input {
+    width: 90px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px 8px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    background: #f8fbfa;
+}
+
+.timer-input:disabled {
+    opacity: 0.85;
+    background: #edf4f1;
+}
+
+.timer-input[readonly] {
+    cursor: default;
+}
+
+.timer-stepper {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 3px;
+}
+
+.timer-step {
+    width: 26px;
+    min-width: 26px;
+    height: 19px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #e7f1ef;
+    color: var(--ink);
+    padding: 0;
+    line-height: 1;
+    font-size: 0.72rem;
+}
+
+.timer-step:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.session-state {
+    margin: 8px 0 12px;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.drift-count {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--warning);
+}
+
+button {
+    width: 100%;
+    border: 0;
+    border-radius: 9px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.primary {
+    background: linear-gradient(160deg, var(--accent), var(--accent-strong));
+    color: #ffffff;
+}
+
+.secondary {
+    margin-top: 10px;
+    background: #e7f1ef;
+    color: var(--ink);
+}

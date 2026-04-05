@@ -1,0 +1,49 @@
+{
+    "manifest_version": 3,
+    "name": "Reality Anchor",
+    "version": "1.0.0",
+    "description": "Gentle reminders to stay present and reduce maladaptive daydreaming.",
+    "permissions": [
+        "storage",
+        "alarms",
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
+        "https://www.youtube.com/*",
+        "https://music.youtube.com/*"
+    ],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "action": {
+        "default_title": "Reality Anchor",
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.youtube.com/*",
+                "https://music.youtube.com/*"
+            ],
+            "js": [
+                "utils/banner-injector.js",
+                "content.js"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "banner.html",
+                "banner-styles.css"
+            ],
+            "matches": [
+                "https://www.youtube.com/*",
+                "https://music.youtube.com/*"
+            ]
+        }
+    ]
+}
