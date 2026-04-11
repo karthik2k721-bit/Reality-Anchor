@@ -16,8 +16,8 @@
 
 body {
     margin: 0;
-    width: 320px;
-    min-height: 320px;
+    width: 380px;
+    min-height: 550px;
     font-family: "Trebuchet MS", "Segoe UI", sans-serif;
     background: radial-gradient(circle at top, #e6f4ef, var(--bg));
     color: var(--ink);
@@ -64,7 +64,7 @@ body {
 .timer-editor {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
 }
 
 .timer-input {
@@ -110,6 +110,69 @@ body {
 .timer-step:disabled {
     opacity: 0.65;
     cursor: not-allowed;
+}
+
+.timer-preset-btn {
+    width: 26px;
+    min-width: 26px;
+    height: 26px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #f8fbfa;
+    color: var(--ink);
+    padding: 0;
+    line-height: 1;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.timer-preset-btn:hover:not(:disabled) {
+    background: #e7f1ef;
+    border-color: var(--accent);
+}
+
+.timer-preset-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    background: #edf4f1;
+}
+
+.timer-preset-btn:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.timer-preset-menu {
+    position: fixed;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px 0;
+    box-shadow: 0 4px 12px rgba(10, 36, 30, 0.12);
+    z-index: 1000;
+    min-width: 100px;
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.timer-preset-menu.hidden {
+    display: none;
+}
+
+.timer-preset-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: var(--ink);
+    font-size: 0.85rem;
+    transition: background-color 0.2s ease;
+}
+
+.timer-preset-item:hover {
+    background: #e7f1ef;
+}
+
+.timer-preset-item:active {
+    background: #d5e6e1;
 }
 
 .session-state {

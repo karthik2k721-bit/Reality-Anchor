@@ -3,6 +3,8 @@ const resetButton = document.getElementById("reset-button");
 const timerInput = document.getElementById("timer-input");
 const timerUpButton = document.getElementById("timer-up");
 const timerDownButton = document.getElementById("timer-down");
+const timerPresetBtn = document.getElementById("timer-preset-btn");
+const timerPresetMenu = document.getElementById("timer-preset-menu");
 const sessionState = document.getElementById("session-state");
 const driftCount = document.getElementById("drift-count");
 
@@ -10,6 +12,7 @@ const DEFAULT_DURATION_MS = 25 * 60 * 1000;
 const MIN_DURATION_MS = 1 * 60 * 1000;
 const MAX_DURATION_MS = 60 * 60 * 1000;
 const STEP_DURATION_MS = 1 * 60 * 1000;
+const PRESET_DURATIONS_MINUTES = [5, 10, 15, 20, 25, 30, 45, 60];
 
 let currentStatus = null;
 let countdownId = null;
@@ -60,6 +63,11 @@ function setDurationControlsDisabled(disabled) {
     timerInput.disabled = disabled;
     timerUpButton.disabled = disabled;
     timerDownButton.disabled = disabled;
+    timerPresetBtn.disabled = disabled;
+    // Hide menu when disabling controls
+    if (disabled) {
+        hidePresetMenu();
+    }
 }
 
 function stepDuration(deltaMs) {
@@ -70,6 +78,49 @@ function stepDuration(deltaMs) {
     hasUserAdjustedDuration = true;
     configuredDurationMs = clampDurationMs(configuredDurationMs + deltaMs);
     setTimerInputValue(configuredDurationMs);
+}
+
+
+function showPresetMenu() {
+    if (currentStatus?.isRunning) {
+        return; // Don't open menu during active session
+    }
+
+    // Show menu first to measure its height
+    timerPresetMenu.classList.remove("hidden");
+
+    // Position menu below the button
+    const btnRect = timerPresetBtn.getBoundingClientRect();
+
+    // Keep menu within left/right bounds
+    let left = btnRect.left;
+    const menuWidth = timerPresetMenu.offsetWidth;
+    if (left + menuWidth > window.innerWidth) {
+        left = window.innerWidth - menuWidth - 4;
+    }
+
+    timerPresetMenu.style.position = "fixed";
+    timerPresetMenu.style.top = (btnRect.bottom + 4) + "px";
+    timerPresetMenu.style.left = Math.max(4, left) + "px";
+
+    timerPresetBtn.setAttribute("aria-expanded", "true");
+}
+
+function hidePresetMenu() {
+    timerPresetMenu.classList.add("hidden");
+    timerPresetBtn.setAttribute("aria-expanded", "false");
+}
+
+function selectPreset(minutes) {
+    if (currentStatus?.isRunning) {
+        return;
+    }
+
+    hasUserAdjustedDuration = true;
+    configuredDurationMs = minutes * 60 * 1000;
+    configuredDurationMs = clampDurationMs(configuredDurationMs);
+    setTimerInputValue(configuredDurationMs);
+    hidePresetMenu();
 }
 
 function stopCountdown() {
@@ -170,6 +221,32 @@ timerUpButton.addEventListener("click", () => {
 
 timerDownButton.addEventListener("click", () => {
     stepDuration(-STEP_DURATION_MS);
+});
+
+timerPresetBtn.addEventListener("click", () => {
+    const isMenuHidden = timerPresetMenu.classList.contains("hidden");
+    if (isMenuHidden) {
+        showPresetMenu();
+    } else {
+        hidePresetMenu();
+    }
+});
+
+// Handle preset menu item clicks
+timerPresetMenu.querySelectorAll(".timer-preset-item").forEach((item) => {
+    item.addEventListener("click", (event) => {
+        const minutes = Number(event.target.getAttribute("data-minutes"));
+        if (Number.isFinite(minutes) && minutes > 0) {
+            selectPreset(minutes);
+        }
+    });
+});
+
+// Close menu when clicking outside
+document.addEventListener("click", (event) => {
+    if (!event.target.closest(".timer-editor") && !event.target.closest(".timer-preset-menu")) {
+        hidePresetMenu();
+    }
 });
 
 timerInput.setAttribute("readonly", "readonly");
